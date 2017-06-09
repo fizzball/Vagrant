@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# by Ramon
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :web1 do |web1|
+	web1.vm.box = "hashicorp/precise64"
+  end
+  config.vm.define :app1 do |app1|
+	app1.vm.box = "hashicorp/precise64"
+  end
+
+  config.vm.provision :shell, inline: "apt-get update -y"
+
+#  config.vm.provision :puppet do |puppet|
+#       puppet.manifests_path = "provision/manifests"
+#       puppet.manifest_file  = "default.pp"
+#       puppet.module_path = "provision/modules"
+
+#  config.vm.network :forwarded_port, guest: 80, host: 4567
+
+end
