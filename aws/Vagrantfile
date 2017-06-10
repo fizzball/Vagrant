@@ -1,0 +1,37 @@
+# Require the AWS provider plugin
+require 'vagrant-aws'
+
+# Create and configure the AWS instance(s)
+# and open ports 22 and 80 to all inbound traffic.
+#
+# Use the following command to spin up the box...
+#   vagrant up --provider=aws
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "aws-dummy"
+
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = "RAKIAJJDTIJ5G23TDVNJQA"
+    aws.secret_access_key = "rd+ZpH9vsp7wcvq4de9ANRqgnNujwOFGe1yoiQTc0a"
+    aws.keypair_name = "OW"
+    aws.region = "ap-southeast-2"
+    aws.ami = "ami-f8eafc9b"
+    aws.instance_type = "t1.micro"
+    aws.security_groups = [ "default" ]
+
+    aws.tags = {
+      Name: "Vagrant AWS"
+    }
+    override.ssh.username = "ubuntu"
+    override.ssh.private_key_path = "~/.ssh/OW.pem"
+  end
+
+#  config.vm.provision :shell, :path => "bootstrap.sh"
+
+#  config.vm.provision :puppet do |puppet|
+#    puppet.manifests_path = "puppet/manifests"
+#    puppet.manifest_file = "site.pp"
+#    puppet.module_path = "puppet/modules"
+#  end
+
+end
