@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# by Ramon
+
+Vagrant.configure("2") do |config|
+
+#  config.vm.provision :shell, inline: "yum update -y"
+  config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.synced_folder ".", "/vagrant"
+
+  config.vm.define :puppet do |puppet|
+	puppet.vm.box = "hashicorp/precise64"
+        puppet.vm.box = "puppetlabs/centos-6.6-64-puppet"
+        puppet.vm.hostname = "puppet.box"
+	puppet.vm.network :private_network, ip: "1.1.1.111"
+  end
+
+  config.vm.define :client do |client|
+        client.vm.box = "puppetlabs/centos-6.6-64-puppet"
+        client.vm.hostname = "client.box"
+	client.vm.network :private_network, ip: "1.1.1.112"
+  end
+
+end
