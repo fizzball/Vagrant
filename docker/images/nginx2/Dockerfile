@@ -4,6 +4,8 @@ ENV HOME /root
 ENV PATH /usr/local/nginx/bin:$PATH
 WORKDIR /root
 
+RUN mkdir /vagrant
+
 EXPOSE 80 443
 ENTRYPOINT ["nginx"]
 CMD ["-g", "daemon off;"]
