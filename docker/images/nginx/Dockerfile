@@ -1,12 +1,11 @@
 FROM nginx
 
 ENV HOME /root
-ENV PATH /usr/local/nginx/bin:$PATH
+ENV PATH $PATH:/usr/local/nginx/bin
 WORKDIR /root
 
-ADD web_content /usr/share/nginx/html/
-ADD nginx_config /etc/nginx/
-COPY bashrc /root/.bashrc
+COPY bashrc .bashrc
+ADD nginx_config /etc/nginx/conf.d/
 
 EXPOSE 80 443
 ENTRYPOINT ["nginx"]
