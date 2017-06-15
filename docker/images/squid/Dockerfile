@@ -13,7 +13,6 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 80F70E11F0F0D5F
 
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y squid3-ssl=${SQUID_VERSION}* \
-# && DEBIAN_FRONTEND=noninteractive apt-get install -y squid3-ssl \
  && mv /etc/squid3/squid.conf /etc/squid3/squid.conf.original \
  && rm -rf /var/lib/apt/lists/*
 
