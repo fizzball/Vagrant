@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.provider "docker" do |d|
+    d.image = "squid"
+    d.name = "squid"
+    d.ports = ["3128:3128"]
+    d.vagrant_machine = "macbook"
+  end
+
+# config.vm.synced_folder "/temp", "/host_temp"
+
+end
