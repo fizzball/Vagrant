@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 MAINTAINER ramon@openwealth.com.au
 
-ENV SQUID_VERSION=3.3.8 \
+ENV SQUID_VERSION=3.3.8-2ssl2 \
     SQUID_CACHE_DIR=/var/spool/squid3 \
     SQUID_LOG_DIR=/var/log/squid3 \
     SQUID_USER=proxy
@@ -13,6 +13,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 80F70E11F0F0D5F
 
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y squid3-ssl=${SQUID_VERSION}* \
+# && DEBIAN_FRONTEND=noninteractive apt-get install -y squid3-ssl \
  && mv /etc/squid3/squid.conf /etc/squid3/squid.conf.original \
  && rm -rf /var/lib/apt/lists/*
 
