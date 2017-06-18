@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
         puppet.vm.box = "bento/centos-7.2"
         puppet.vm.hostname = "puppet.box"
  	puppet.vm.network :private_network, ip: "1.1.1.111"
-        puppet.vm.provision :shell, path: "server_bootstrap.sh"
+        puppet.vm.provision :shell, path: "server/server_bootstrap.sh"
     	puppet.vm.provider :virtualbox do |vb|
                vb.memory = 3072
                vb.cpus = 2
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
         client.vm.box = "bento/centos-7.2"
         client.vm.hostname = "client.box"
  	client.vm.network :private_network, ip: "1.1.1.112"
-        client.vm.provision :shell, path: "client_bootstrap.sh"
+        client.vm.provision :shell, path: "client/client_bootstrap.sh"
   end
 
   config.vm.define :web do |web|
@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
         web.vm.hostname = "web.box"
 	web.vm.network :private_network, ip: "1.1.1.113"
         web.vm.network :forwarded_port, guest: 80, host: 8080
-        web.vm.provision :shell, path: "web_bootstrap.sh"
+        web.vm.provision :shell, path: "web/web_bootstrap.sh"
   end
 
 end
