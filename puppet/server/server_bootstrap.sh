@@ -44,10 +44,5 @@ if isinstalled $PACKAGE1;
 	systemctl start puppetserver 
 	echo **** installing Modules ****
 	/opt/puppetlabs/puppet/bin/puppet module install bashtoni-timezone --version 1.0.0 
-	/opt/puppetlabs/puppet/bin/puppet module install puppetlabs-apache --version 0.9.0 
-
-	# fix port string bug in apache module
-	cp /vagrant/init.pp /etc/puppetlabs/code/environments/production/modules/apache/manifests/init.pp 
-
 	echo **** done *** ;
 fi
