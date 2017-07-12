@@ -4,6 +4,7 @@ Vagrant.configure(2) do |config|
   # login u:vagrant, p:vagrant
 
   config.vm.box = "hashicorp/precise64"
+  config.vm.hostname = "tectonic"
 
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
