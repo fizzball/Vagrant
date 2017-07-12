@@ -1,5 +1,5 @@
 Vagrant.configure(2) do |config|
-  # CentOS 6.2
+  # Ubuntu 12.04
   # start gui with startx
   # login u:vagrant, p:vagrant
 
@@ -8,17 +8,12 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
     vb.gui = true
+    vb.memory = 2048
+    vb.cpus = 2
   end
 
-  # Install xfce and virtualbox additions
-  config.vm.provision "shell", inline: "sudo apt-get update"
-  config.vm.provision "shell", inline: "sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
-  config.vm.provision "shell", inline: "sudo apt-get install -y firefox"
-  config.vm.provision "shell", inline: "sudo wget https://releases.tectonic.com/tectonic-1.6.4-tectonic.1.tar.gz"
-  config.vm.provision "shell", inline: "tar xzvf tectonic-1.6.4-tectonic.1.tar.gz"
-  config.vm.provision "shell", inline: "cd tectonic"
-  config.vm.provision "shell", inline: "./tectonic-installer/linux/installer -open-browser=false"
-  config.vm.provision "shell", inline: "firefox http://127.0.0.1:4444"
-  # Permit anyone to start the GUI
-  config.vm.provision "shell", inline: "sudo sed -i 's/allowed_users=.*$/allowed_users=anybody/' /etc/X11/Xwrapper.config"
+  config.vm.define "tectonic" do |tectonic|
+    end
+
+  config.vm.provision :shell, path: "bootstrap.sh"
 end
